@@ -85,7 +85,7 @@ void array_remove(Harray *arr, int val)
 int array_get(Harray *arr, int i) {
   if (i < 0 || i >= arr->capacity) {
     printf("Error: index out of range \n");
-    return 0;
+    exit(EXIT_FAILURE);
   }
   return arr->data[i];
 }
@@ -93,6 +93,7 @@ int array_get(Harray *arr, int i) {
 void array_set(Harray *arr, int i, int val) {
   if (i < 0 || i >= arr->capacity) {
     printf("Error: index out of range \n");
+    exit(EXIT_FAILURE);
   }
   arr->data[i] = val;
 }
