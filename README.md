@@ -6,7 +6,7 @@ if you are a notion user this is my [notion summary](https://hefni101.notion.sit
 
 ### DataStructures
 - [x] Arrays
-- [ ] Linked List
+- [x] Linked List
 - [ ] Stack
 - [ ] Queue
 - [ ] Hash Table
