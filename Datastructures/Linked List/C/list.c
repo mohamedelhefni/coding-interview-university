@@ -20,12 +20,9 @@ int size(List *list);
 void push_front(List *list, int val);
 void pop_front(List *list);
 void push_back(List *list, int val);
-void print_list(List *list);
-
-// to implement
 void pop_back(List *list);
+void print_list(List *list);
 void erase(List *list, int val);
-void add_before(List *list, node *nd, int val);
 
 int main() {
   List *lst = create_list();
@@ -42,6 +39,8 @@ int main() {
   pop_front(lst);
   push_front(lst, 10);
   push_back(lst, 50);
+  pop_back(lst);
+  erase(lst, 1);
   print_list(lst);
   printf("list size is: %d \n", size(lst));
   printf("\nfirst Element in list is:  %d\n", top_front(lst));
@@ -85,8 +84,43 @@ int find(List *list, int val) {
   return found;
 }
 
+void erase(List *list, int index) {
+  if (list->head == 0) {
+    printf("Cannot erase: empty list\n");
+    exit(EXIT_FAILURE);
+  }
+  node *current = list->head;
+  node *last = list->head;
+
+  int current_index = 0;
+  while (index > current_index && current != 0) {
+    ++current_index;
+    last = current;
+    current = current->next;
+  }
+
+  if (current_index < index) {
+    printf("Index out of bounds\n");
+    exit(EXIT_FAILURE);
+  }
+
+  if (index == 0) {
+    list->head = current->next;
+    if (list->tail == current) {
+      list->tail = list->head;
+    }
+  } else {
+    last->next = current->next;
+    if (list->tail == current) {
+      list->tail = last;
+    }
+  }
+
+  free(current);
+}
+
 void push_front(List *list, int val) {
-  struct node *nd = malloc(sizeof(node));
+  node *nd = malloc(sizeof(node));
   nd->key = val;
   nd->next = list->head;
   list->head = nd;
@@ -99,8 +133,6 @@ void pop_front(List *list) {
   } else {
     node *tmp = list->head;
     list->head = list->head->next;
-    /*if (list->head == NULL)*/
-    /*list->tail = NULL;*/
     free(tmp);
   }
 }
@@ -115,6 +147,28 @@ void push_back(List *list, int val) {
   } else {
     list->tail->next = nd;
     list->tail = nd;
+  }
+}
+
+void pop_back(List *list) {
+  if (list->tail == NULL) {
+    printf("Error List is empty ");
+    exit(EXIT_FAILURE);
+  }
+
+  if (list->head == list->tail) {
+    free(list->head);
+    list->head = list->tail = NULL;
+  } else {
+    node *p = list->head;
+    node *last = list->head;
+    while (p != list->tail) {
+      last = p;
+      p = p->next;
+    }
+    free(p);
+    last->next = NULL;
+    list->tail = last;
   }
 }
 
