@@ -7,8 +7,8 @@ if you are a notion user this is my [notion summary](https://hefni101.notion.sit
 ### DataStructures
 - [x] Arrays
 - [x] Linked List
-- [ ] Stack
-- [ ] Queue
+- [x] Stack
+- [x] Queue
 - [ ] Hash Table
 - [ ] More Knowledge
     - [ ] Binary Search

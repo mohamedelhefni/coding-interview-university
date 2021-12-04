@@ -32,7 +32,7 @@ int main() {
   array_push(arr, 26);
   array_print(arr, 1);
   printf("Removing 23 \n");
-  array_remove(arr,  23);
+  array_remove(arr, 23);
   array_print(arr, 1);
   array_push(arr, 25);
   array_print(arr, 1);
@@ -64,14 +64,10 @@ void array_push(Harray *arr, int val) {
   arr->size++;
 }
 
-void array_remove(Harray *arr, int val)
-{
-  for(int i =0; i < arr->size; i++)
-  {
-    if(arr->data[i] == val)
-    {
-      for(int j = i; j <= arr->size - 2; j++)
-      {
+void array_remove(Harray *arr, int val) {
+  for (int i = 0; i < arr->size; i++) {
+    if (arr->data[i] == val) {
+      for (int j = i; j <= arr->size - 2; j++) {
         arr->data[j] = arr->data[j + 1];
       }
       break;
@@ -79,8 +75,6 @@ void array_remove(Harray *arr, int val)
   }
   arr->size -= 1;
 }
-
-
 
 int array_get(Harray *arr, int i) {
   if (i < 0 || i >= arr->capacity) {
