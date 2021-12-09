@@ -9,7 +9,7 @@ if you are a notion user this is my [notion summary](https://hefni101.notion.sit
 - [x] Linked List
 - [x] Stack
 - [x] Queue
-- [ ] Hash Table
+- [x] Hash Table
 - [ ] More Knowledge
     - [ ] Binary Search
     - [ ] Bitwise Operations
