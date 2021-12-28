@@ -15,6 +15,8 @@ int get_max(node *root);
 int get_height(node *root);
 int get_nodes_count(node *root);
 int is_bst(node *root);
+node *delete_value(node *root, int data);
+void delete_tree(node *root);
 void print_tree(node *root);
 
 int main() {
@@ -31,14 +33,15 @@ int main() {
 
   if (in_tree(root, 13))
     printf("node is in tree\n");
-
-  if(is_bst(root))
+  delete_value(root, 14);
+  if (is_bst(root))
     printf("Tree is BST \n");
   printf("Tree height is : %d\n", get_height(root));
   printf("Node count in tree is : %d \n", get_nodes_count(root));
   printf("min is : %d\n", get_min(root));
   printf("max is : %d\n", get_max(root));
   print_tree(root);
+  delete_tree(root);
 }
 
 node *get_node(int data) {
@@ -140,6 +143,45 @@ int is_bst(node *root) {
     return 1;
   else
     return 0;
+}
+
+node *delete_value(node *root, int value) {
+  if (root == NULL)
+    return root;
+
+  if (value < root->data) {
+    root->left = delete_value(root->left, value);
+  } else if (value > root->data) {
+    root->right = delete_value(root->right, value);
+  } else { // found value
+
+    if (root->left == NULL && root->right == NULL) {
+      free(root);
+      root = NULL;
+    } else if (root->left == NULL) {
+      node *temp = root;
+      root = root->right;
+      free(temp);
+    } else if (root->right == NULL) {
+      node *temp = root;
+      root = root->left;
+      free(temp);
+    } else {
+      int right_min = get_min(root->right);
+      root->data = right_min;
+      root->right = delete_value(root->right, right_min);
+    }
+  }
+
+  return root;
+}
+
+void delete_tree(node *root) {
+  if (root == NULL)
+    return;
+  delete_tree(root->left);
+  delete_tree(root->right);
+  free(root);
 }
 
 void print_tree(node *root) {
